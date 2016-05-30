@@ -29,9 +29,18 @@ fs.readFile('./data/female.txt', function (err, buffer) {
       // console.log(myArray[i])
       // myObject.firstName = myArray[i]
   }
-  console.log(emptyArray);
-})
 
+  var postJson = JSON.stringify(emptyArray)
+
+  console.log(postJson);
+
+  fs.writeFile('./data/womenNames.js', postJson, function (err) {
+    if (err) {
+      return callback(err)
+      console.log(err.message)
+    }
+  })
+})
 
 //
 // fs.readFile(path, function (err, buffer) {

@@ -5,26 +5,26 @@ var knex = require('knex')(config.development)
 var names = require('./names.json');
 
 
-var chunkSize = 100;
-knex.batchInsert('users', names, 100)
-  .returning('id')
-  .then(function (data) {})
-  .catch(function (error) {
-    console.error(error);
+// var chunkSize = 100;
+// knex.batchInsert('users', names, 100)
+//   .returning('id')
+//   .then(function (data) {})
+//   .catch(function (error) {
+//     console.error(error);
+//   })
+
+knex.select('lastName')
+  .from('Users')
+  .where({
+    firstName: 'Nora'
+  })
+  // .orWhere({
+  //   firstName: 'Zippo'
+  // })
+  .then(function (data) {
+    console.log(data);
   })
 
-// knex.select('lastName')
-//   .from('Users')
-//   .where({
-//     firstName: 'Nora'
-//   })
-//   // .orWhere({
-//   //   firstName: 'Zippo'
-//   // })
-//   .then(function (data) {
-//     console.log(data);
-//   })
-//
 // knex.column('firstName')
 //   .from('Users')
 //   .then(function (data) {
