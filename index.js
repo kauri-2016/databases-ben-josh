@@ -4,26 +4,38 @@ var knex = require('knex')(config.development)
 
 var names = require('./names.json');
 
+var womenNames = require('./womenNames.json')
 
-// var chunkSize = 100;
-// knex.batchInsert('users', names, 100)
-//   .returning('id')
-//   .then(function (data) {})
-//   .catch(function (error) {
-//     console.error(error);
+console.log(womenNames.length)
+var smallArray = []
+
+for (var i = 0; i < 100; i++) {
+  smallArray.push(womenNames[i])
+}
+
+// console.log(smallArray)
+//console.log(names)
+
+var chunkSize = 100;
+
+knex.batchInsert('users', smallArray, chunkSize)
+  .returning('id')
+  .then(function (data) {})
+  .catch(function (error) {
+    console.error(error);
+  })
+
+// knex.select('lastName')
+//   .from('Users')
+//   .where({
+//     firstName: 'Nora'
 //   })
-
-knex.select('lastName')
-  .from('Users')
-  .where({
-    firstName: 'Nora'
-  })
-  // .orWhere({
-  //   firstName: 'Zippo'
-  // })
-  .then(function (data) {
-    console.log(data);
-  })
+//   // .orWhere({
+//   //   firstName: 'Zippo'
+//   // })
+//   .then(function (data) {
+//     console.log(data);
+//   })
 
 // knex.column('firstName')
 //   .from('Users')
